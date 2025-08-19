@@ -1,15 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Những Thứ Về TTrâm Anh</title>
+<title>Những Thứ Về Trâm Anh</title>
 <style>
     body {
         background: linear-gradient(to right, #ffcccc, #ffe6f0);
         margin: 0;
-        padding: 0 0 400px 0; /* thêm khoảng trống cuối trang */
+        padding: 0 0 400px 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         overflow-x: hidden;
         position: relative;
@@ -82,10 +81,11 @@
         background-color: #ff3399;
     }
 
-    /* ảnh xuất hiện dưới nút */
+    /* Ảnh xuất hiện dưới nút */
     .surprise-image {
-        display: flex;
-        justify-content: center;
+        display: none;
+        flex-direction: column;
+        align-items: center;
         margin: 20px 0;
     }
 
@@ -95,7 +95,14 @@
         box-shadow: 0 6px 15px rgba(0,0,0,0.25);
     }
 
-    /* trái tim bay */
+    .surprise-image p {
+        font-size: 20px;
+        color: #d6336c;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    /* Trái tim bay */
     .heart {
         position: fixed;
         bottom: 0;
@@ -123,12 +130,11 @@
 <p class="center-text">NHỮNG THỨ VỀ TRÂM ANH</p>
 
 <div class="image-row">
-    <img src="tramanh.jpg" alt="Vân Anh">
-    <img src="tramanh2.jpg" alt="Vân Anh 1">
-    <img src="tramanh1.jpg" alt="Vân Anh 1">
-    <img src="tramanh3.jpg" alt="Vân Anh 1">
+    <img src="tramanh.jpg" alt="Trâm Anh">
+    <img src="tramanh2.jpg" alt="Trâm Anh 2">
+    <img src="tramanh1.jpg" alt="Trâm Anh 1">
+    <img src="tramanh3.jpg" alt="Trâm Anh 3">
 </div>
-
 
 <h1 class="section-title">CÁC SỞ THÍCH</h1>
 <ul>
@@ -137,23 +143,22 @@
     <li>Thích uống nước đái</li>
 </ul>
 
-
-<!-- Nút bấm ở dưới cùng -->
+<!-- Nút bấm -->
 <button class="btn-change" id="changeBtn">Bấm để bất ngờ 💖</button>
 
 <!-- Ảnh xuất hiện dưới nút -->
-<div class="surprise-image" id="surpriseImage" style="display:none;">
+<div class="surprise-image" id="surpriseImage">
     <img id="autoImg" src="" alt="Bất ngờ">
+    <p id="imgCaption">CÓ CÁI LỒN</p>
 </div>
 
 <script>
-    // Danh sách ảnh
+    // Danh sách ảnh bất ngờ
     const imageSets = [
         "anhdim.jpg",
         "tramanh.jpg",
         "tramanh1.jpg",
-        
-        
+        "tramanh2.jpg"
     ];
 
     let currentIndex = 0;
@@ -179,26 +184,26 @@
         autoImg.src = imageSets[currentIndex];
 
         if(intervalId === null){
-            // Ảnh đầu tiên giữ 5 giây
+            // Ảnh đầu tiên giữ 2 giây
             setTimeout(() => {
                 currentIndex++;
                 if(currentIndex < imageSets.length){
                     autoImg.src = imageSets[currentIndex];
                 }
 
-                // Sau đó chạy tiếp mỗi 2 giây, nhưng dừng khi hết ảnh
+                // Sau đó chạy tiếp mỗi 1 giây, dừng khi hết ảnh
                 intervalId = setInterval(() => {
                     currentIndex++;
                     if(currentIndex < imageSets.length){
                         autoImg.src = imageSets[currentIndex];
                     } else {
-                        clearInterval(intervalId); // dừng lại
+                        clearInterval(intervalId);
                     }
                 }, 1000);
-            }, 5000);
+            }, 2000);
         }
 
-        // tạo trái tim bay lên
+        // Tạo 6 trái tim bay
         for (let i = 0; i < 6; i++) {
             setTimeout(createHeart, i * 400);
         }
